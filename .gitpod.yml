@@ -23,6 +23,7 @@ tasks:
     sudo mysql -e "FLUSH PRIVILEGES;"
 
 - name: phpMyAdmin
+  openMode: split-right
   init: > 
     gp ports await 3306 &&
     cd www &&
@@ -33,6 +34,7 @@ tasks:
     gp sync-done phpmyadmin
 
 - name: Apache
+  openMode: split-right
   init: >
     gp sync-await phpmyadmin &&
     sudo cp .env/apache.conf /etc/apache2/apache2.conf &&
