@@ -26,8 +26,7 @@ tasks:
   init: > 
     gp ports await 3306 &&
     cd www &&
-    composer create-project phpmyadmin/phpmyadmin &&
-    
+    composer create-project phpmyadmin/phpmyadmin  
   command: >
     cp .env/config.sample.inc.php www/phpmyadmin/config.inc.php &&
     gp sync-done phpmyadmin
