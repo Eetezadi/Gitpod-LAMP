@@ -20,12 +20,13 @@ tasks:
     gp ports await 3306 && 
     sudo mysql -e "CREATE USER 'gitpod'@'localhost' IDENTIFIED BY 'gitpod';" &&
     sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'gitpod'@'localhost' WITH GRANT OPTION;" &&
-    sudo mysql -e "FLUSH PRIVILEGES;"
+    sudo mysql -e "FLUSH PRIVILEGES;" &&
+    gp sync-done mysql
 
 - name: phpMyAdmin
   openMode: split-right
   init: > 
-    gp ports await 3306 &&
+    gp sync-await mysql &&
     cd www &&
     composer create-project phpmyadmin/phpmyadmin  
   command: >
