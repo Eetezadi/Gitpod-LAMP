@@ -4,7 +4,7 @@ FROM gitpod/workspace-mysql:latest
 RUN sudo install-packages php-xdebug
 
 # Install phpMyAdmin
-RUN sudo install-packages phpmyadmin
+RUN sudo apt-get update && sudo apt-get install -y phpmyadmin
 # Link phpMyAdmin to the /workspace/www directory
 RUN sudo ln -s /usr/share/phpmyadmin /workspace/www/phpmyadmin
 
