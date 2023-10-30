@@ -20,7 +20,7 @@ tasks:
     gp ports await 3306 &&
     cd www &&
     composer create-project phpmyadmin/phpmyadmin &&
-    gp sync done phpmyadmin
+    gp sync-done phpmyadmin
 
 - name: Apache
   init: >
