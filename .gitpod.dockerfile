@@ -1,4 +1,4 @@
-FROM gitpod/workspace-mysql:latest
+FROM gitpod/workspace-mysql
 
 # install corresponding PHP Xdebug
 RUN sudo install-packages php-xdebug
