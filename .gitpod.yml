@@ -28,7 +28,7 @@ tasks:
     cd www &&
     composer create-project phpmyadmin/phpmyadmin  
   command: >
-    cp .env/config.sample.inc.php www/phpmyadmin/config.inc.php &&
+    cp .env/config.inc.php www/phpmyadmin/config.inc.php &&
     gp sync-done phpmyadmin
 
 - name: Apache
