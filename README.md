@@ -1,4 +1,4 @@
-# Template repo to run the Apache2 Web Server with PHP and XDebug in Gitpod.io
+# Template repo for LAMP on Gitpod.io
 
 ## Try or Contribute
 
@@ -8,14 +8,14 @@ This is a template repo, you can create your own using this as a template. Or le
 
 ## What this does
 
-* Uses the Dockerfile to configure Apache and XDebug (based on Gitpod Image "workspace-full" which includes PHP)
-* Runs apache on port 8080
-* Added a custom and minimal apache.conf. 
+* Uses a Gitpod dockerfile based on Ubuntu Linux to configure Apache, mySQL, PHP and adds also XDebug (based on Gitpod Image "workspace-mysql)
+* Runs Apache2 on port 8080 serving from directory "www"
 * Follows the Apache logs in the Gitpod Terminal View via multitail
+* Runs mySQL together with PhpMyAdmin
 
-## Terminal Commands to try to control Apache
-* `apachectl start` - start Apache Web Server (it's started automatically on workspace launch)
-* `apachectl stop` - stop Apache Web Server
-* `gp open /var/log/apache2/access.log` - Open Apache access.log in Gitpod editor
-* `gp open /var/log/apache2/error.log` - Open Apache error.log in Gitpod editor
-* `multitail /var/log/apache2/access.log -I /var/log/apache2/error.log` - View and follow logs in Terminal
+## Things to do
+* On first start wait until the browser window opens...
+* Open PhpMyAdmin in the browser to setup you databases and configure users
+* Try XDebug on debug_example.php
+* Build you own project...hope this saved you some time :)
+

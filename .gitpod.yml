@@ -6,7 +6,7 @@ image:
 ports:
 - port: 8080
   name: Apache
-  onOpen: open-preview
+  onOpen: open-browser
 - port: 3306
   name: mySQL
   onOpen: ignore
