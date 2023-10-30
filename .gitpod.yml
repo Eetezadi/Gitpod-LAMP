@@ -19,7 +19,9 @@ tasks:
   init: > 
     gp ports await 3306 &&
     cd www &&
-    composer create-project phpmyadmin/phpmyadmin &&
+    git clone https://github.com/phpmyadmin/phpmyadmin.git &&
+    composer update --no-dev &&
+    yarn install --production &&
     gp sync-done phpmyadmin
 
 - name: Apache
