@@ -5,8 +5,13 @@ image:
   
 ports:
 - port: 8080
+  name: Apache
   onOpen: open-preview
+- port: 3306
+  name: mySQL
+  onOpen: ignore
 - port: 9003
+  name: xDebug
   onOpen: ignore
 
 tasks:
