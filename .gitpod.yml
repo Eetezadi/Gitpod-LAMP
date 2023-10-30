@@ -15,12 +15,21 @@ ports:
   onOpen: ignore
 
 tasks:
+- name: mySQL
+  init: >
+    gp ports await 3306 && 
+    sudo mysql -e "CREATE USER 'gitpod'@'localhost' IDENTIFIED BY 'gitpod';" &&
+    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'gitpod'@'localhost' WITH GRANT OPTION;" &&
+    sudo mysql -e "FLUSH PRIVILEGES;"
+
 - name: phpMyAdmin
   init: > 
     gp ports await 3306 &&
     cd www &&
     composer create-project phpmyadmin/phpmyadmin &&
-    cp phpmyadmin/config.sample.inc.php phpmyadmin/config.inc.php &&
+    
+  command: >
+    cp .env/config.sample.inc.php www/phpmyadmin/config.inc.php &&
     gp sync-done phpmyadmin
 
 - name: Apache
@@ -32,8 +41,6 @@ tasks:
   command: >
     apachectl start &&
     multitail /var/log/apache2/access.log -I /var/log/apache2/error.log
-
-
 
 vscode:
   extensions:
