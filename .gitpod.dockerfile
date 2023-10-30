@@ -3,16 +3,6 @@ FROM gitpod/workspace-mysql:latest
 # install corresponding PHP Xdebug
 RUN sudo install-packages php-xdebug
 
-# Install phpMyAdmin
-# RUN sudo apt-get update && sudo apt-get install -y phpmyadmin
-# Link phpMyAdmin to the /workspace/www directory
-# RUN sudo ln -s /usr/share/phpmyadmin /workspace/www/phpmyadmin
-
-
-# Link phpMyAdmin to the /workspace/www directory
-RUN sudo ln -s /usr/share/phpmyadmin /workspace/www/phpmyadmin
-
-
 # optional: use a custom apache config.
 COPY apache.conf /etc/apache2/apache2.conf
 
