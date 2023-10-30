@@ -16,13 +16,16 @@ ports:
 
 tasks:
 - name: mySQL
+  before: echo "Starting up mySQL DB..."
   init: >
     gp ports await 3306 && 
     sudo mysql -e "CREATE USER 'gitpod'@'localhost' IDENTIFIED BY 'gitpod';" &&
     sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'gitpod'@'localhost' WITH GRANT OPTION;" &&
     sudo mysql -e "FLUSH PRIVILEGES;"
+  command: echo "mySQL DB is ready."
 
 - name: phpMyAdmin
+  before: echo "Installing phpMyAdmin..."
   init: > 
     gp ports await 3306 &&
     cd www &&
@@ -30,9 +33,11 @@ tasks:
   command: >
     cd .. &&
     cp .env/config.inc.php www/phpmyadmin/config.inc.php &&
-    gp sync-done phpmyadmin
+    gp sync-done phpmyadmin &&
+    echo "phpMyAdmin is ready..."
 
 - name: Apache
+  before: echo "Launching Apache..."
   init: >
     gp sync-await phpmyadmin &&
     sudo cp .env/apache.conf /etc/apache2/apache2.conf &&
