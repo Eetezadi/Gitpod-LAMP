@@ -17,6 +17,7 @@ ports:
 tasks:
 - name: phpMyAdmin
   init: > 
+    gp ports await 3306 &&
     cd www &&
     composer create-project phpmyadmin/phpmyadmin
     gp sync done phpmyadmin
