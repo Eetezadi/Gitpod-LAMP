@@ -41,6 +41,7 @@ tasks:
   init: > 
     gp sync-await mysql &&
     cd www &&
+    echo "Installing phpMyAdmin..." &&
     composer create-project phpmyadmin/phpmyadmin &&
     cd .. &&
     cp .env/config.inc.php www/phpmyadmin/config.inc.php
