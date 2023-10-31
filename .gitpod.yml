@@ -18,9 +18,7 @@ tasks:
 
 # Copies config for Apache and Xdebug, start the server and tails the log
 - name: Apache
-  openMode: split-left
   init: >
-    gp sync-await mysql &&
     sudo cp .env/apache.conf /etc/apache2/apache2.conf &&
     sudo cp .env/xdebug_cli.ini /etc/php/8.2/cli/conf.d/99-custom.ini &&
     sudo cp .env/xdebug_web.ini /etc/php/8.2/apache2/conf.d/99-custom.ini
