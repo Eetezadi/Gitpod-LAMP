@@ -15,35 +15,37 @@ ports:
   onOpen: ignore
 
 tasks:
-- name: mySQL
-  init: >
-    gp ports await 3306 && 
-    sudo mysql -e "CREATE USER 'gitpod'@'localhost' IDENTIFIED BY 'gitpod';" &&
-    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'gitpod'@'localhost' WITH GRANT OPTION;" &&
-    sudo mysql -e "FLUSH PRIVILEGES;" &&
-    gp sync-done mysql
 
-- name: phpMyAdmin
-  openMode: split-right
-  init: > 
-    gp sync-await mysql &&
-    cd www &&
-    composer create-project phpmyadmin/phpmyadmin  
-  command: >
-    cd .. &&
-    cp .env/config.inc.php www/phpmyadmin/config.inc.php &&
-    gp sync-done phpmyadmin
-
+# Copies config for Apache and Xdebug, start the server and tails the log
 - name: Apache
-  openMode: split-right
+  openMode: split-left
   init: >
-    gp sync-await phpmyadmin &&
+    gp sync-await mysql &&
     sudo cp .env/apache.conf /etc/apache2/apache2.conf &&
     sudo cp .env/xdebug_cli.ini /etc/php/8.2/cli/conf.d/99-custom.ini &&
     sudo cp .env/xdebug_web.ini /etc/php/8.2/apache2/conf.d/99-custom.ini
   command: >
     apachectl start &&
     multitail /var/log/apache2/access.log -I /var/log/apache2/error.log
+
+# Creates user "gitpod" when db is ready
+- name: mySQL
+  init: >
+    gp ports await 3306 && 
+    sudo mysql -e "CREATE USER 'gitpod'@'localhost' IDENTIFIED BY 'gitpod';" &&
+    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'gitpod'@'localhost' WITH GRANT OPTION;" &&
+    sudo mysql -e "FLUSH PRIVILEGES;"
+  command: gp sync-done mysql
+
+# Installs phpMyAdmin over composer when db is ready
+- name: phpMyAdmin
+  openMode: split-right
+  init: > 
+    gp sync-await mysql &&
+    cd www &&
+    composer create-project phpmyadmin/phpmyadmin &&
+    cd .. &&
+    cp .env/config.inc.php www/phpmyadmin/config.inc.php
 
 vscode:
   extensions:
