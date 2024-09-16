@@ -18,4 +18,5 @@ This is a template repo, you can create your own using this as a template. Or le
 * Open PhpMyAdmin in the browser to setup your databases and configure users
 * Try XDebug on debug_example.php
 * Build your own project...hope this saved you some time :)
+* You can adopt the PHP version in the *.gitpod.dockerfile* by changing `RUN sudo update-alternatives --set php $(which php8.3)`
 
