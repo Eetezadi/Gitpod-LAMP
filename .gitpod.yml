@@ -6,7 +6,7 @@ image:
 ports:
 - port: 8080
   name: Apache
-  onOpen: open-browser
+  onOpen: open-preview
 - port: 3306
   name: mySQL
   onOpen: ignore
@@ -20,8 +20,8 @@ tasks:
 - name: Apache
   before: >
     sudo cp .env/apache.conf /etc/apache2/apache2.conf &&
-    sudo cp .env/xdebug_cli.ini /etc/php/8.2/cli/conf.d/99-custom.ini &&
-    sudo cp .env/xdebug_web.ini /etc/php/8.2/apache2/conf.d/99-custom.ini
+    sudo cp .env/xdebug_cli.ini /etc/php/8.3/cli/conf.d/99-custom.ini &&
+    sudo cp .env/xdebug_web.ini /etc/php/8.3/apache2/conf.d/99-custom.ini
   command: >
     apachectl start &&
     multitail /var/log/apache2/access.log -I /var/log/apache2/error.log

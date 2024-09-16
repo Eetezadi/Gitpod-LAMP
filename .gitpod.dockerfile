@@ -1,5 +1,8 @@
 FROM gitpod/workspace-mysql
 
+# Change your version here
+RUN sudo update-alternatives --set php $(which php8.3)
+
 # install corresponding PHP Xdebug
 RUN sudo install-packages php-xdebug
 
